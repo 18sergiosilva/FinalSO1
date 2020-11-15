@@ -1,12 +1,3 @@
-
-FROM node:8.6
- 
-WORKDIR  /app
-
-COPY ./ /app/
-
-RUN npm install
-
-EXPOSE 4200
-
-ENTRYPOINT npm start
+FROM nginx:alpine
+COPY /dist/finalso1 /usr/share/nginx/html
+EXPOSE 80
