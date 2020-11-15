@@ -11,7 +11,7 @@ export class ModificarUsuarioService {
   constructor(private http: HttpClient, private router: Router) { }
 
   obtenerDatosUsuario(id) {
-    let apiUrl = 'http://34.72.158.70:5000/usuario/' + id;
+    let apiUrl = 'http://35.239.6.24:5000/usuario/' + id;
     return this.http.get<any>(apiUrl, {})
       .pipe(map(data => {
         return data;
@@ -19,7 +19,7 @@ export class ModificarUsuarioService {
   }
 
   modificarDatosUser(id, contra){
-    let apiUrl = 'http://34.72.158.70:5000/usuario/'+id;
+    let apiUrl = 'http://35.239.6.24:5000/usuario/'+id;
     return this.http.put<any>(apiUrl, {
         'contrasena': contra
     })

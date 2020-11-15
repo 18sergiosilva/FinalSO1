@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   }
   entrar() {
 
-    this.http.post('http://34.72.158.70:5000/login',
+    this.http.post('http://35.239.6.24:5000/login',
       {
         'userOMail': this.correo,
         'pass': this.contra

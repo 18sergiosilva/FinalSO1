@@ -26,7 +26,7 @@ export class RegistrarseComponent implements OnInit {
     console.log("username->"+this.username);
     console.log("contrasena->"+this.contrasena);
 
-    this.http.post('http://34.72.158.70:5000/usuario',
+    this.http.post('http://35.239.6.24:5000/usuario',
       {
         'username': this.username,
         'contrasena': this.contrasena
