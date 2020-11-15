@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
       localStorage.setItem('logued', '0');
       this.router.navigate(['login']);
     }
-    this.cadena = 'No funciono';
+    this.cadena = 'Bienvenido';
 
     this.http.get(`http://${window.location.hostname}:5000/`, { responseType: 'text' })
       .toPromise().then((data: any) => {
