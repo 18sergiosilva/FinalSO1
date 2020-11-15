@@ -1,0 +1,83 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { ModificarUsuarioService } from '../services/modificar-usuario.service';
+import { first } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-modificar',
+  templateUrl: './modificar.component.html',
+  styleUrls: ['./modificar.component.scss']
+})
+export class ModificarComponent implements OnInit {
+
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute,private modificarService: ModificarUsuarioService) {}
+
+    //datos
+    usuario;
+    //id="EAWLL";
+    id = localStorage.getItem('user');
+    //id = String(this.route.snapshot.params['id']);
+    httpdata;
+    httpdata1;
+    username = "";
+    correo = "";
+    contrasena = "";
+    nombres = "";
+    apellidos = "";
+    dpi = "";
+    edad = null;
+
+  ngOnInit() {
+    if (localStorage.getItem('logued') !== '1') {
+      localStorage.setItem('logued', '0');
+      this.router.navigate(['login']);
+    }
+    this.cargarDatosUsuario();
+  }
+
+  cargarDatosUsuario(): boolean {
+      this.modificarService.obtenerDatosUsuario(this.id)
+      .pipe(first())
+      .subscribe(
+        data => {
+          //console.log(data);
+          this.usuario = data.usuario;
+          this.displaydata(this.usuario);
+          return true;
+        },
+        error => {
+          console.log(error);
+          return false;
+        });
+        return true;
+    }
+
+  displaydata(data) {
+    this.httpdata1 = data;
+    //console.log(this.httpdata1);
+    this.username=data.username;
+    this.contrasena = data.contrasena;
+  }
+
+  editarUsuario(): boolean {
+    this.modificarService.modificarDatosUser(this.id,this.contrasena)
+    .pipe(first())
+    .subscribe(
+      data => {
+        //console.log(data);
+        this.router.navigate(['home']);
+      },
+      error => {
+        console.log(error);
+        return false;
+      });
+      return true;
+  }
+
+  cancelar() {
+    this.router.navigate(['home']);
+  }
+
+}
